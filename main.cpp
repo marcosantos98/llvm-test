@@ -1,7 +1,5 @@
-#include <array>
 #include <cstdio>
 #include <fstream>
-#include <iostream>
 #include <map>
 #include <memory>
 #include <sstream>
@@ -12,7 +10,6 @@
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/Instructions.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/IR/Module.h"
@@ -183,7 +180,7 @@ void parseProgram(const std::string &source) {
         default:
             if (isalpha(source[cursor])) {
                 auto res = tryParseIdent();
-                // A
+
                 if (res.first == "pushs") {
                     current.type = OPType::PUSHS;
                 } else if (res.first == "puts") {
@@ -193,7 +190,7 @@ void parseProgram(const std::string &source) {
                 } else if (res.first == "exit") {
                     current = INTRINSIC_EXIT;
                 }
-                // B
+
                 cursor = res.second;
             } else if (isalnum(source[cursor])) {
                 auto res = tryParseNumber();
@@ -208,8 +205,6 @@ void parseProgram(const std::string &source) {
 std::unique_ptr<llvm::LLVMContext> llvmContext;
 std::unique_ptr<llvm::IRBuilder<>> irBuilder;
 std::unique_ptr<llvm::Module> llvmModule;
-
-std::map<std::string, llvm::Value *> namedValues;
 
 void compileToLLVMIR() {
 
