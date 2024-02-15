@@ -1,6 +1,6 @@
 # llvm test
 
-Generate llvm-ir from a basic stack virtual machine and compile it to the host machine target.
+Generate llvm-ir from a basic stack virtual machine using the llvm toolchain and compile it to the host machine target.
 
 ## OPs:
 
